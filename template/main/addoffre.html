@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Add Offer{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/reg.css' %}">
+{% endblock style %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card">
+          <h2 class="card-title text-center">Add Offer</h2>
+          <div class="card-body py-md-4">
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                {% render_field form.name_country class="form-control" id="name" placeholder="Enter Your Country"%}
+              </div>
+              <div class="form-group">
+                {% render_field form.price_place class="form-control" id="name" placeholder="Price" %}
+              </div>
+              <div class="form-group">
+                {% render_field form.statue class="form-control" placeholder="Statue" %}
+              </div>
+              <div class="form-group">
+                {% render_field form.place_image class="form-control" %}
+              </div>
+              {% for message in messages %}
+                <div style="margin: 0rem 10rem;width: 100%;">
+                    <p class="ms auto">{{message}}</p>
+                </div>
+              {% endfor %}
+              <div class="d-flex flex-row align-items-center justify-content-between">
+                <a href="{% url 'home' %}" class="btn btn-danger">Cancel</a>
+                <button class="btn btn-primary" type="submit">Add Offer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock content %}

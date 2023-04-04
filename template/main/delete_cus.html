@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Customer{% endblock title %}
+
+{% block content %}
+<div class="container"></div>
+  <div class="row">
+    <div class="col-4">
+      <div class="card" style="width: 15rem; margin: 3rem 37.5rem;">
+        <div class="card-header justify-content-center" style="display:flex; justify-content:center;">
+           Want To Delete ?
+        </div>
+        <div class="card-body justify-content-center">
+          <h5 class="card-title" style="display:flex; justify-content:center;">{{deleted}}</h5>
+          <hr class="card-hr">
+          <div class="center">
+            <form action="" method="post" style=" display:flex; justify-content:space-between; padding:2px;">
+                {% csrf_token %}
+                <a href="{% url 'showcustomer' %}" class="btn btn-primary">cancel</a>
+                <input type="submit" class="btn btn-danger" value="delete">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

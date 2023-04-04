@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Our Customers{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock style %}
+{% block content %}
+<section class="articles">
+    {% if count == 0 %}
+    <article style="background:none;">
+    </article>
+    <article style="">
+        <div class="article-wrapper"> 
+          <div class="article-body">
+            <h2>No Clients Are Registred Yet</h2>
+            <p>
+              <h6>Name : Empty</h6>
+              <h6>Phone Number : Empty</h6>
+              <h6>Passport Number: Empty</h6>
+              <h6>Joining Date : Empty</h6>
+            </p>
+            <hr>
+            <div class="center" style="display: flex; justify-content:space-between;">
+                <a href="#" class="btn btn-primary disabled">Edit</a>
+                <a href="#" class="btn btn-danger disabled">Delete</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    {% endif %}
+    {% for i in client %}
+      <article>
+        <div class="article-wrapper"> 
+          <div class="article-body">
+            <h2>Client Informations</h2>
+            <p>
+              <h6>Name : {{i.name}} </h6>
+              <h6>Phone Number : {{i.phonenumber}}</h6>
+              <h6>Passport Number: {{i.passportnumber}}</h6>
+              <h6>Joining Date : {{i.date}}</h6>
+            </p>
+            <hr>
+            <div style="display: flex; justify-content:space-between;">
+                <a href="{% url 'update_customer' i.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete_customer' i.id %}" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+</section>
+{% endblock content %}

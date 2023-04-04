@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<div class="container"></div>
+  <div class="row">
+    <div class="col-4">
+      <div class="card" style="width: 15rem; margin: 3rem 15rem;">
+        <div class="card-header justify-content-center" style="display:flex; justify-content:center;">
+          Order Count
+        </div>
+        <div class="card-body justify-content-center">
+          <h5 class="card-title" style="display:flex; justify-content:center;">Orders</h5>
+          <hr class="card-hr">
+          <p class="card-text" style="display:flex; justify-content:center;">There is {{count}} {% if count > 1 %}Orders{% else %}Order{% endif %}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 15rem; margin: 3rem 8rem;">
+        <div class="card-header justify-content-center" style="display:flex; justify-content:center;">
+          Welcome
+        </div>
+        <div class="card-body justify-content-center">
+          <h5 class="card-title" style="display:flex; justify-content:center;">{{request.user.username}}</h5>
+          <hr class="card-hr">
+          <p class="card-text" style="display:flex; justify-content:center;">Welcome To Maham Tour</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 15rem; margin: 3rem 1rem;">
+        <div class="card-header justify-content-center" style="display:flex; justify-content:center;">
+          Customers
+        </div>
+        <div class="card-body justify-content-center">
+          <h5 class="card-title" style="display:flex; justify-content:center;">Customers</h5>
+          <hr class="card-hr">
+          <p class="card-text" style="display:flex; justify-content:center;">There is {{count_client}} {% if count_client > 1 %}Customers{% else %}Customer{% endif %}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  <div style="background-color:#fff; padding:16px 14px 3px; width:69%; margin:3rem 15rem; border-radius:1rem">
+    <table class="table" style="width:60rem;background-color:none;">
+      <thead>
+        <tr>
+          <th scope="col">Client</th>
+          <th scope="col">voyage</th>
+          <th scope="col">place</th>
+          <th scope="col">Date De Debut</th>
+          <th scope="col">Date De Fin</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if count == 0 %}
+        <tr>
+          <td>Empty</td>
+          <td>Empty</td>
+          <td>Empty</td>
+          <td>Empty</td>
+          <td>Empty</td>
+          <td>0 DA</td>
+          <td><a href="#" class="btn btn-primary disabled">Update</a></td>
+          <td><a href="#" class="btn btn-danger disabled">Delete</a></td>
+        </tr>
+        
+        {% endif %}
+          {% for order in orders %}
+          <tr>
+              <td>{{order.client}}</td>
+              <td>{{order.voyage}}</td>
+              <td>{{order.place}}</td>
+              <td>{{order.date_debut}}</td>
+              <td>{{order.date_fin}}</td>
+              <td>{{order.add}} DA</td>
+              <td><a href="{% url 'update_order' order.id %}" class="btn btn-primary">Update</a></td>
+              <td><a href="{% url 'delete_order' order.id %}" class="btn btn-danger">Delete</a></td>
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
